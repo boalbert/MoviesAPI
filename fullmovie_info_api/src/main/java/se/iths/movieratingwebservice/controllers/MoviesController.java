@@ -24,7 +24,7 @@ public class MoviesController {
 	public MovieWithInfoDto getMovie(@PathVariable long id) {
 
 		// Finds the object which holds references to the other movies
-		MovieDto movieDto = getMovies(id);
+		MovieDto movieDto = getOneMovie(id);
 
 		// Which Ids to find in the other services
 		long genreId = movieDto.getGenreId();
@@ -32,23 +32,23 @@ public class MoviesController {
 		long directorId = movieDto.getDirectorId();
 
 		// Search for the ids in the other APIs
-		GenreDto genreDto = getGenres(genreId);
-		LanguageDto languageDto = getLanguages(languageId);
-		DirectorDto directorDto = getDirectorInfo(directorId);
+		GenreDto genreDto = getOneGenre(genreId);
+		LanguageDto languageDto = getOneLanguage(languageId);
+		DirectorDto directorDto = getOneDirector(directorId);
 
 		// Return to client
 		return new MovieWithInfoDto(movieDto, directorDto, genreDto.getGenre(), languageDto.getLanguage());
 
 	}
 
-	public MovieDto getMovies(long id) {
+	public MovieDto getOneMovie(long id) {
 		final String uri = "http://localhost:5054/movies/" + id;
 
 		return restTemplate.getForObject(uri, MovieDto.class);
 
 	}
 
-	public DirectorDto getDirectorInfo(long id) {
+	public DirectorDto getOneDirector(long id) {
 
 		final String uri = "http://localhost:5050/directors/" + id;
 
@@ -57,7 +57,7 @@ public class MoviesController {
 
 	}
 
-	public GenreDto getGenres(long id) {
+	public GenreDto getOneGenre(long id) {
 
 		final String uri = "http://localhost:5053/genre/" + id;
 
@@ -65,7 +65,7 @@ public class MoviesController {
 
 	}
 
-	public LanguageDto getLanguages(long id) {
+	public LanguageDto getOneLanguage(long id) {
 
 		final String uri = "http://localhost:5052/languages/" + id;
 
