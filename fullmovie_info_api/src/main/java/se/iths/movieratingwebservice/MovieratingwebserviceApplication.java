@@ -14,22 +14,19 @@ public class MovieratingwebserviceApplication {
     public static void main(String[] args) {
         SpringApplication.run(MovieratingwebserviceApplication.class, args);
     }
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
-    }
-
-    @Bean
-    public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
-        return args -> {
-            MovieDto quote = restTemplate.getForObject(
-                    "http://localhost:5054/movies/1", MovieDto.class);
-            System.out.println(quote);
-
-        };
 
 
-    }
+//    @Bean
+//    public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
+//        return args -> {
+//            MovieDto quote = restTemplate.getForObject(
+//                    "http://localhost:5054/movies/1", MovieDto.class);
+//            System.out.println(quote);
+//
+//        };
+//
+//
+//    }
 
 }
 
