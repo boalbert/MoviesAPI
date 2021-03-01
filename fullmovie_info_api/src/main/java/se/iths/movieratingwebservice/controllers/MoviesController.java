@@ -45,7 +45,6 @@ public class MoviesController {
 
 		// Return to client
 		return new MovieWithInfoDto(movieDto, directorDto, genreDto.getGenre(), languageDto.getLanguage());
-
 	}
 	
 	public MovieDto getOneMovie(long id) {

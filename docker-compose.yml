@@ -10,3 +10,4 @@ services:
       - ./mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: wp
+      MYSQL_DATABASE: movies

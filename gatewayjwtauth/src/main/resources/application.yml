@@ -1,0 +1,35 @@
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
+server:
+  port: 8080
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    consul:
+      discovery:
+        register: false
+        registerHealthCheck: false
+      config:
+        enabled: false
+      host: localhost
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: fullmovie_info_api
+          uri: lb://fullmovie_info_api
+          predicates:
+            - Path=/movies/**
+          filters:
+            - RewritePath=/movies/(?<path>.*), /movies/$\{path}
+        - id: auth
+          uri: http://localhost:9100
+          predicates:
+            - Path=/auth/**
+            - Method=POST
+          filters:
+            - RewritePath=/auth/(?<path>.*), /auth/$\{path}
