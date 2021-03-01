@@ -23,6 +23,12 @@ spring:
         - id: fullmovie-info-api
           uri: lb://fullmovie-info-api
           predicates:
+            - Path=/fullmovies/**
+          filters:
+            - RewritePath=/fullmovies/(?<path>.*), /fullmovies/$\{path}
+        - id: movie-service
+          uri: lb://movie-service
+          predicates:
             - Path=/movies/**
           filters:
             - RewritePath=/movies/(?<path>.*), /movies/$\{path}

@@ -27,7 +27,7 @@ public class MoviesController {
 	@Autowired
 	RestTemplate restTemplate;
 
-	@GetMapping("/movies/{id}")
+	@GetMapping("/fullmovies/{id}")
 	public MovieWithInfoDto getMovie(@PathVariable long id) {
 
 		// Finds the object which holds references to the other movies
