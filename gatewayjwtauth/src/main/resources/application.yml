@@ -20,8 +20,8 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: fullmovie_info_api
-          uri: lb://fullmovie_info_api
+        - id: fullmovie-info-api
+          uri: lb://fullmovie-info-api
           predicates:
             - Path=/movies/**
           filters:
