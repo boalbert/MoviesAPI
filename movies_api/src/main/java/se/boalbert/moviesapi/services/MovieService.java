@@ -15,9 +15,7 @@ import java.util.Optional;
 @Component
 public class MovieService implements Service {
 
-	// These will be used to convert Movie to Dto / etc
 	private MovieMapper movieMapper;
-	// This will be used to talk to the database
 	private MovieRepo movieRepo;
 
 	public MovieService(MovieMapper movieMapper, MovieRepo movieRepo) {
@@ -75,8 +73,7 @@ public class MovieService implements Service {
 			MovieEntity updatedMovieEntity = movieEntity.get();
 
 			if (movieRating != null && !(movieRating.imdbRating >= 1.0 && movieRating.imdbRating <= 10.0))
-				//				throw new InvalidMovieRatingException(id); // TODO Return response as Json
-				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid IMDB Rating: " + movieRating.imdbRating + ". Accepts '1.0' - '10.0'."); // TODO Return response as Json
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid IMDB Rating: " + movieRating.imdbRating + ". Accepts '1.0' - '10.0'.");
 
 			if (movieRating != null && (movieRating.imdbRating >= 1.0 && movieRating.imdbRating <= 10.0))
 				updatedMovieEntity.setImdbRating(movieRating.imdbRating);

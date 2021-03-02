@@ -32,6 +32,12 @@ spring:
             - Path=/movies/**
           filters:
             - RewritePath=/movies/(?<path>.*), /movies/$\{path}
+        - id: directors-service
+          uri: lb://directors-service
+          predicates:
+            - Path=/directors/**
+          filters:
+            - RewritePath=/directors/(?<path>.*), /directors/$\{path}
         - id: auth
           uri: http://localhost:9100
           predicates:

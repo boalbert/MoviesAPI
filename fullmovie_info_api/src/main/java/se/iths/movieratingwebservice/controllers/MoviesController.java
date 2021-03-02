@@ -11,11 +11,18 @@ import org.springframework.web.client.RestTemplate;
 import se.iths.movieratingwebservice.dtos.*;
 import se.iths.movieratingwebservice.service.MovieService;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
 @RestController
 public class MoviesController {
+
+	final String moviesUrl = "http://localhost:5054/movies/";
+	final String directorsUrl = "http://localhost:5050/directors/";
+	final String languageUrl = "http://localhost:5052/languages/";
+	final String genreUrl = "http://localhost:5053/genre/";
 
 	MovieService movieService;
 
@@ -28,7 +35,7 @@ public class MoviesController {
 	RestTemplate restTemplate;
 
 	@GetMapping("/fullmovies/{id}")
-	public MovieWithInfoDto getMovie(@PathVariable long id) {
+	public MovieWithInfoDto getFullMovie(@PathVariable long id) {
 
 		// Finds the object which holds references to the other movies
 		MovieDto movieDto = getOneMovie(id);
@@ -46,40 +53,72 @@ public class MoviesController {
 		// Return to client
 		return new MovieWithInfoDto(movieDto, directorDto, genreDto.getGenre(), languageDto.getLanguage());
 	}
-	
-	public MovieDto getOneMovie(long id) {
-		final String uri = "http://localhost:5054/movies/" + id;
 
-		return restTemplate.getForObject(uri, MovieDto.class);
+	@GetMapping("/fullmovies")
+	public List<MovieWithInfoDto> getAllFullMovies() {
+
+		MovieDto[] allMovies = getAllMovies();
+		List<DirectorDto> allDirectors = Arrays.asList(getAllDirectors());
+		List<LanguageDto> allLanguages = Arrays.asList(getAllLanguages());
+		List<GenreDto> allGenres = Arrays.asList(getAllGenres());
+
+		List<MovieWithInfoDto> movieWithInfoList = new ArrayList<>();
+
+		for (MovieDto movieDto : allMovies) {
+			MovieWithInfoDto newMovie = new MovieWithInfoDto();
+
+			newMovie.setMovieDto(movieDto);
+			newMovie.setDirectorDto(allDirectors.get((int) movieDto.getDirectorId()));
+			newMovie.setLanguage(allLanguages.get((int) movieDto.getLanguageId()).getLanguage());
+			newMovie.setGenre(allGenres.get((int) movieDto.getGenreId()).getGenre());
+
+			movieWithInfoList.add(newMovie);
+		}
+		return movieWithInfoList;
+	}
+
+	public MovieDto[] getAllMovies() {
+
+		return restTemplate.getForObject(moviesUrl, MovieDto[].class);
+	}
+
+	public DirectorDto[] getAllDirectors() {
+
+		return restTemplate.getForObject(directorsUrl, DirectorDto[].class);
+	}
+
+	public LanguageDto[] getAllLanguages() {
+
+		return restTemplate.getForObject(languageUrl, LanguageDto[].class);
+	}
+
+	public GenreDto[] getAllGenres() {
+
+		return restTemplate.getForObject(genreUrl, GenreDto[].class);
+	}
+
+	public MovieDto getOneMovie(long id) {
+
+		return restTemplate.getForObject( moviesUrl + id, MovieDto.class);
 
 	}
 
 	public DirectorDto getOneDirector(long id) {
 
-		final String uri = "http://localhost:5050/directors/" + id;
-
-		return restTemplate.getForObject(uri, DirectorDto.class);
-
+		return restTemplate.getForObject(directorsUrl + id, DirectorDto.class);
 
 	}
 
 	public GenreDto getOneGenre(long id) {
 
-		final String uri = "http://localhost:5053/genre/" + id;
-
-		return restTemplate.getForObject(uri, GenreDto.class);
+		return restTemplate.getForObject(genreUrl + id, GenreDto.class);
 
 	}
 
 	public LanguageDto getOneLanguage(long id) {
 
-		final String uri = "http://localhost:5052/languages/" + id;
-
-		return restTemplate.getForObject(uri, LanguageDto.class);
-
+		return restTemplate.getForObject(languageUrl + id, LanguageDto.class);
 	}
-
-
 }
 
 

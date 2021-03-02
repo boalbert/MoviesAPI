@@ -43,7 +43,7 @@ public class MovieController {
 	}
 
 	// TODO Write test for Delete
-	@DeleteMapping
+	@DeleteMapping("/movies/{id}")
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
 	}

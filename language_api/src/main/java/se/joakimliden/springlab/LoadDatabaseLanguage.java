@@ -16,8 +16,8 @@ public class LoadDatabaseLanguage {
 			languageRepository.save(new Language(1, "English"));
 			languageRepository.save(new Language(2, "French"));
 			languageRepository.save(new Language(3, "Swedish"));
-			languageRepository.save(new Language(3, "German"));
-			languageRepository.save(new Language(3, "Danish"));
+			languageRepository.save(new Language(4, "German"));
+			languageRepository.save(new Language(5, "Danish"));
 
 		};
 	}

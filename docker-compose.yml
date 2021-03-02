@@ -6,8 +6,6 @@ services:
     image: mariadb:10.5
     ports:
       - 3306:3306
-    volumes:
-      - ./mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: wp
       MYSQL_DATABASE: movies
