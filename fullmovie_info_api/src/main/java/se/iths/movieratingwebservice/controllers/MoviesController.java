@@ -66,13 +66,12 @@ public class MoviesController {
 
 		for (MovieDto movieDto : allMovies) {
 			MovieWithInfoDto newMovie = new MovieWithInfoDto();
-
 			newMovie.setMovieDto(movieDto);
-			newMovie.setDirectorDto(allDirectors.get((int) movieDto.getDirectorId()));
-			newMovie.setLanguage(allLanguages.get((int) movieDto.getLanguageId()).getLanguage());
-			newMovie.setGenre(allGenres.get((int) movieDto.getGenreId()).getGenre());
-
+			newMovie.setDirectorDto(allDirectors.get(((int) movieDto.getDirectorId()) - 1 ));
+			newMovie.setLanguage(allLanguages.get(((int) movieDto.getLanguageId()) - 1 ).getLanguage());
+			newMovie.setGenre(allGenres.get(((int) movieDto.getGenreId()) - 1 ).getGenre());
 			movieWithInfoList.add(newMovie);
+
 		}
 		return movieWithInfoList;
 	}
