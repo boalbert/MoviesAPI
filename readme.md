@@ -10,10 +10,10 @@ Projektet är byggt som en microservice applikation i Spring-ramverket med en Ma
 Sammankopplingen av information görs genom UserEndpoint som hämtar information från alla andra
 services och som sammanställer informationen. 
 
-• Metoder som ändrar på data har auth begränsning via Auth Service och tokens (JWT).
-• Configurering körs från en config service.
-• Gateway med lastbalansering.
-• Discovery service för att kunna köra flera instancer av samma service.
+- Metoder som ändrar på data har auth begränsning via Auth Service och tokens (JWT).
+- Configurering körs från en config service.
+- Gateway med lastbalansering.
+- Discovery service för att kunna köra flera instancer av samma service.
 
 ## Endpoints
 
