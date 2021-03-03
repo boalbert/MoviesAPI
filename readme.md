@@ -21,7 +21,7 @@ Servicen innehåller nedan endpoints.
 
 `/movies` - Hanterar filminformation.
 
-`/director` - Hanterar information om reghssörer.
+`/directors` - Hanterar information om reghssörer.
 
 `/languages` - Hanterar information om filmens språk.
 
