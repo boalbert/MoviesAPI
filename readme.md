@@ -1,18 +1,32 @@
 # Webservices Lab 2
 # Movies API
 
-`POST`
-localhost:9100/sign-up:
-{
-"username": "kalle",
-"password": "password"
-}
+I detta projekt har vi byggt en Movie-Rating-Api som hantera filmer.
+Projektet är byggt som en microservice applikation i Spring-ramverket med en MariaDB relationsdatabas.
 
-`POST`
-localhost:8080/auth
-{
-"username": "kalle",
-"password": "password"
 
-`GET`
-localhost:8080/movies/1
+## Specifikation
+
+Sammankopplingen av information görs genom UserEndpoint som hämtar information från alla andra
+services och som sammanställer informationen. 
+
+• Metoder som ändrar på data har auth begränsning via Auth Service och tokens (JWT).
+• Configurering körs från en config service.
+• Gateway med lastbalansering.
+• Discovery service för att kunna köra flera instancer av samma service.
+
+## Endpoints
+
+Servicen innehåller nedan endpoints.
+
+`/movies` - Hanterar filminformation.
+
+`/director` - Hanterar information om reghssörer.
+
+`/languages` - Hanterar information om filmens språk.
+
+`/genre` - SHanterar information om filmens genre.
+
+`/movies` - Innehåller referenser till information ovan. Även möjlighet att lägga till kommentar.
+
+`/fullmovies` - Sammanställer information ovan till en separat film.
