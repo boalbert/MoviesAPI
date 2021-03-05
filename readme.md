@@ -1,7 +1,7 @@
 # Webservices Lab 2
 # Movies API
 
-I detta projekt har vi byggt en Movie-Rating-Api som hantera filmer.
+I detta projekt har vi byggt en Movie-Rating-Api som hanterar filmer.
 Projektet är byggt som en microservice applikation i Spring-ramverket med en MariaDB relationsdatabas.
 
 
@@ -11,7 +11,7 @@ Sammankopplingen av information görs genom UserEndpoint som hämtar information
 services och som sammanställer informationen. 
 
 - Metoder som ändrar på data har auth begränsning via Auth Service och tokens (JWT).
-- Configurering körs från en config service.
+- Konfigurering körs från en config service (Consul).
 - Gateway med lastbalansering.
 - Discovery service för att kunna köra flera instancer av samma service.
 
@@ -21,11 +21,11 @@ Servicen innehåller nedan endpoints.
 
 `/movies` - Hanterar filminformation.
 
-`/directors` - Hanterar information om reghssörer.
+`/directors` - Hanterar information om regissörer.
 
 `/languages` - Hanterar information om filmens språk.
 
-`/genre` - SHanterar information om filmens genre.
+`/genre` - Hanterar information om filmens genre.
 
 `/movies` - Innehåller referenser till information ovan. Även möjlighet att lägga till kommentar.
 
